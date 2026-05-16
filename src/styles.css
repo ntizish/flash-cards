@@ -33,6 +33,7 @@ button {
   cursor: pointer;
   background: transparent;
   color: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
 input {
@@ -200,15 +201,6 @@ p {
     opacity 140ms ease;
 }
 
-.primary-button:hover,
-.primary-button:focus-visible,
-.text-button:hover,
-.text-button:focus-visible,
-.folder-link:hover,
-.folder-link:focus-visible {
-  transform: translateY(-1px);
-}
-
 .primary-button:disabled {
   opacity: 0.35;
   cursor: not-allowed;
@@ -218,6 +210,18 @@ p {
 .text-button {
   text-decoration: underline;
   text-underline-offset: 0.18em;
+}
+
+/* Hover effects only on pointer devices (not touch) */
+@media (hover: hover) {
+  .primary-button:hover,
+  .primary-button:focus-visible,
+  .text-button:hover,
+  .text-button:focus-visible,
+  .folder-link:hover,
+  .folder-link:focus-visible {
+    transform: translateY(-1px);
+  }
 }
 
 .study-page {
@@ -246,7 +250,7 @@ p {
 }
 
 .study-card {
-  min-height: calc(100vh - 170px);
+  min-height: calc(100dvh - 170px);
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: 28px;
@@ -362,20 +366,76 @@ p {
   }
 }
 
+/* ── Tablet (≤900px) ─────────────────────────────────────── */
 @media (max-width: 900px) {
-  .folder-row,
-  .word-row {
-    grid-template-columns: 1fr;
+  /* Hide column headers — grid will collapse so they're meaningless */
+  .list-head {
+    display: none;
   }
 
-  .row-actions {
-    justify-content: flex-start;
+  /* Folder row: name full width, count + actions in a second row */
+  .folder-row {
+    grid-template-columns: 1fr auto;
+    row-gap: 6px;
+  }
+
+  .folder-link {
+    grid-column: 1 / 3;
+  }
+
+  .folder-count {
+    grid-column: 1;
+    align-self: center;
+  }
+
+  .folder-row .row-actions {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  /* Word row: checkbox + [spanish / translation stacked] + actions */
+  .word-row {
+    grid-template-columns: 36px 1fr auto;
+    grid-template-rows: auto auto;
+    row-gap: 4px;
+  }
+
+  .word-checkbox {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-self: start;
+    padding-top: 3px;
+  }
+
+  .word-primary {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .word-secondary {
+    grid-column: 2;
+    grid-row: 2;
+    color: #555;
+  }
+
+  .word-row .row-actions {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  /* Bigger touch targets on row action buttons */
+  .row-actions .text-button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
+/* ── Mobile (≤640px) ─────────────────────────────────────── */
 @media (max-width: 640px) {
   .page {
-    width: min(100vw - 20px, 1200px);
+    width: calc(100vw - 20px);
     padding-top: 12px;
     padding-bottom: 24px;
   }
@@ -407,5 +467,11 @@ p {
 
   .primary-button {
     width: 100%;
+  }
+
+  /* Tighter row gap on small screens */
+  .list-row {
+    gap: 12px;
+    padding: 14px 0;
   }
 }
