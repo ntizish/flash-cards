@@ -1,0 +1,44 @@
+[
+  {
+    "id": "basics-folder",
+    "name": "Basics",
+    "words": [
+      {
+        "id": "casa-house",
+        "spanish": "casa",
+        "translation": "house",
+        "enabled": true
+      },
+      {
+        "id": "agua-water",
+        "spanish": "agua",
+        "translation": "water",
+        "enabled": true
+      },
+      {
+        "id": "libro-book",
+        "spanish": "libro",
+        "translation": "book",
+        "enabled": true
+      }
+    ]
+  },
+  {
+    "id": "travel-folder",
+    "name": "Travel",
+    "words": [
+      {
+        "id": "tren-train",
+        "spanish": "tren",
+        "translation": "train",
+        "enabled": true
+      },
+      {
+        "id": "hotel-hotel",
+        "spanish": "hotel",
+        "translation": "hotel",
+        "enabled": true
+      }
+    ]
+  }
+]
